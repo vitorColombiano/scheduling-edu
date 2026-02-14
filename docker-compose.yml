@@ -1,8 +1,7 @@
-version: "3.9"
-
 services:
   web:
     build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bin/rails server -b 0.0.0.0"
     ports:
       - "3000:3000"
     volumes:
@@ -11,6 +10,8 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/app_development
+    stdin_open: true
+    tty: true
 
   db:
     image: postgres:16

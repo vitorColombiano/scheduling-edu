@@ -1,0 +1,250 @@
+---
+openapi: 3.0.1
+info:
+  title: API Agendamento Educacional
+  version: v1
+  description: Documentação da API.
+paths:
+  "/api/v1/auth/login":
+    post:
+      summary: Fazer Login
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: student@test.com
+                password:
+                  type: string
+                  example: '123456'
+              required:
+              - email
+              - password
+  "/api/v1/products":
+    get:
+      summary: list products
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create product
+      responses:
+        '200':
+          description: successful
+  "/api/v1/products/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show product
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update product
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update product
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete product
+      responses:
+        '200':
+          description: successful
+  "/api/v1/professors/{professor_id}/course_classes":
+    parameters:
+    - name: professor_id
+      in: path
+      description: professor_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list course_classes
+      responses:
+        '200':
+          description: successful
+  "/api/v1/professors/{professor_id}/schedulings":
+    parameters:
+    - name: professor_id
+      in: path
+      description: professor_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list schedulings
+      responses:
+        '200':
+          description: successful
+  "/api/v1/professors":
+    get:
+      summary: list professors
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create professor
+      responses:
+        '200':
+          description: successful
+  "/api/v1/professors/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show professor
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update professor
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update professor
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete professor
+      responses:
+        '200':
+          description: successful
+  "/api/v1/students/{student_id}/schedulings":
+    parameters:
+    - name: student_id
+      in: path
+      description: student_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list schedulings
+      responses:
+        '200':
+          description: successful
+  "/api/v1/students":
+    get:
+      summary: Listar Alunos
+      tags:
+      - Students
+      security:
+      - Bearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: Criar Aluno
+      tags:
+      - Students
+      security:
+      - Bearer: []
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                phone:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - phone
+              - email
+  "/api/v1/users":
+    get:
+      summary: list users
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create user
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users/{uuid}":
+    parameters:
+    - name: uuid
+      in: path
+      description: uuid
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update user
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update user
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete user
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Cole seu token aqui (sem a palavra Bearer)
