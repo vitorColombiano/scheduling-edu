@@ -55,3 +55,5 @@ end
 
 gem "jwt", "~> 3.1"
 gem "bcrypt", "~> 3.1"
+gem "rswag-api"
+gem "rswag-ui"
